@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice AI Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1><i class="fas fa-microphone"></i> Voice AI Chatbot</h1>
+            <div class="header-controls">
+                <button class="btn btn--secondary btn-settings" id="settingsBtn">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+                <button class="btn btn--outline btn-export" id="exportBtn">
+                    <i class="fas fa-download"></i> Export
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- AI Model Selector -->
+            <div class="model-selector">
+                <label for="aiModelSelect" class="form-label">AI Model:</label>
+                <select id="aiModelSelect" class="form-control">
+                    <option value="openai">OpenAI GPT-4</option>
+                    <option value="perplexity">Perplexity AI</option>
+                    <option value="anthropic">Anthropic Claude</option>
+                </select>
+            </div>
+
+            <!-- Recording Interface -->
+            <div class="recording-interface">
+                <div class="record-button-container">
+                    <button id="recordBtn" class="record-button" aria-label="Start/Stop Recording">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div class="recording-indicator" id="recordingIndicator"></div>
+                </div>
+                <div class="recording-status" id="recordingStatus">Tap to start recording</div>
+                <div class="recording-timer" id="recordingTimer">00:00</div>
+            </div>
+
+            <!-- Transcription Display -->
+            <div class="transcription-section" id="transcriptionSection">
+                <h3>Transcription:</h3>
+                <div class="transcription-display" id="transcriptionDisplay"></div>
+                <button class="btn btn--primary btn-send" id="sendBtn" disabled>
+                    <i class="fas fa-paper-plane"></i> Send to AI
+                </button>
+            </div>
+
+            <!-- Conversation Interface -->
+            <div class="conversation-section">
+                <div class="conversation-header">
+                    <h3>Conversation</h3>
+                    <button class="btn btn--outline btn-clear" id="clearBtn">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                </div>
+                <div class="conversation-container" id="conversationContainer">
+                    <div class="conversation-placeholder">
+                        <i class="fas fa-comments"></i>
+                        <p>Start a conversation by recording your voice message</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Settings Modal -->
+        <div class="modal-overlay" id="settingsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Settings</h2>
+                    <button class="modal-close" id="closeSettingsBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- API Keys Section -->
+                    <div class="settings-section">
+                        <h3>API Keys</h3>
+                        <div class="form-group">
+                            <label for="openaiKey" class="form-label">OpenAI API Key:</label>
+                            <input type="password" id="openaiKey" class="form-control" placeholder="sk-...">
+                        </div>
+                        <div class="form-group">
+                            <label for="perplexityKey" class="form-label">Perplexity API Key:</label>
+                            <input type="password" id="perplexityKey" class="form-control" placeholder="pplx-...">
+                        </div>
+                        <div class="form-group">
+                            <label for="anthropicKey" class="form-label">Anthropic API Key:</label>
+                            <input type="password" id="anthropicKey" class="form-control" placeholder="sk-ant-...">
+                        </div>
+                    </div>
+
+                    <!-- Speech Recognition Settings -->
+                    <div class="settings-section">
+                        <h3>Speech Recognition</h3>
+                        <div class="form-group">
+                            <label for="languageSelect" class="form-label">Language:</label>
+                            <select id="languageSelect" class="form-control">
+                                <option value="en-US">English (US)</option>
+                                <option value="en-GB">English (UK)</option>
+                                <option value="es-ES">Spanish</option>
+                                <option value="fr-FR">French</option>
+                                <option value="de-DE">German</option>
+                                <option value="ja-JP">Japanese</option>
+                                <option value="zh-CN">Chinese (Mandarin)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Audio Settings -->
+                    <div class="settings-section">
+                        <h3>Audio Settings</h3>
+                        <div class="form-group">
+                            <label for="audioFormat" class="form-label">Format:</label>
+                            <select id="audioFormat" class="form-control">
+                                <option value="wav">WAV (Higher Quality)</option>
+                                <option value="mp3">MP3 (Smaller Size)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sampleRate" class="form-label">Sample Rate:</label>
+                            <select id="sampleRate" class="form-control">
+                                <option value="44100">44.1 kHz (CD Quality)</option>
+                                <option value="22050">22.05 kHz (Voice Quality)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Theme Settings -->
+                    <div class="settings-section">
+                        <h3>Appearance</h3>
+                        <div class="form-group">
+                            <label for="themeSelect" class="form-label">Theme:</label>
+                            <select id="themeSelect" class="form-control">
+                                <option value="system">System Default</option>
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--secondary" id="cancelSettingsBtn">Cancel</button>
+                    <button class="btn btn--primary" id="saveSettingsBtn">Save Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Processing your request...</div>
+        </div>
+
+        <!-- Error Toast -->
+        <div class="error-toast" id="errorToast">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span class="error-message" id="errorMessage"></span>
+            <button class="error-close" id="errorClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
