@@ -24,6 +24,17 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Permission Status -->
+            <div class="permission-status" id="permissionStatus">
+                <div class="permission-indicator">
+                    <span id="permissionIcon">🟡</span>
+                    <span id="permissionText">Requesting microphone permissions...</span>
+                </div>
+                <button class="btn btn--primary btn-grant-permission" id="grantPermissionBtn" style="display: none;">
+                    <i class="fas fa-microphone"></i> Grant Microphone Access
+                </button>
+            </div>
+
             <!-- AI Model Selector -->
             <div class="model-selector">
                 <label for="aiModelSelect" class="form-label">AI Model:</label>
@@ -34,15 +45,35 @@
                 </select>
             </div>
 
-            <!-- Recording Interface -->
+            <!-- Text Input Section -->
+            <div class="text-input-section">
+                <h3>Type Your Message</h3>
+                <div class="text-input-container">
+                    <textarea 
+                        id="textInput" 
+                        class="form-control text-input" 
+                        placeholder="Type your message here or use voice recording below..."
+                        maxlength="2000"
+                        rows="4"></textarea>
+                    <div class="text-input-footer">
+                        <span class="character-count" id="characterCount">0 / 2000</span>
+                        <button class="btn btn--primary btn-send-text" id="sendTextBtn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Recording Interface -->
             <div class="recording-interface">
+                <h3>Or Record Your Voice</h3>
                 <div class="record-button-container">
                     <button id="recordBtn" class="record-button" aria-label="Start/Stop Recording">
                         <i class="fas fa-microphone"></i>
                     </button>
                     <div class="recording-indicator" id="recordingIndicator"></div>
                 </div>
-                <div class="recording-status" id="recordingStatus">Tap to start recording</div>
+                <div class="recording-status" id="recordingStatus">🎤 Start Recording</div>
                 <div class="recording-timer" id="recordingTimer">00:00</div>
             </div>
 

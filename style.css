@@ -12,12 +12,12 @@
   --color-charcoal-700: rgba(31, 33, 33, 1);
   --color-charcoal-800: rgba(38, 40, 40, 1);
   --color-slate-900: rgba(19, 52, 59, 1);
-  --color-teal-300: rgb(222, 213, 110);
-  --color-teal-400: rgb(176, 178, 45);
-  --color-teal-500: rgb(212, 229, 33);
-  --color-teal-600: rgb(128, 126, 29);
-  --color-teal-700: rgb(115, 97, 26);
-  --color-teal-800: rgb(159, 161, 41);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
   --color-red-400: rgba(255, 84, 89, 1);
   --color-red-500: rgba(192, 21, 47, 1);
   --color-orange-400: rgba(230, 129, 97, 1);
@@ -198,7 +198,7 @@
     --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 
     /* RGB versions for dark mode */
-    --color-success-rgb: var(--color-yellow-300-rgb);
+    --color-success-rgb: var(--color-teal-300-rgb);
     --color-error-rgb: var(--color-red-400-rgb);
     --color-warning-rgb: var(--color-orange-400-rgb);
     --color-info-rgb: var(--color-gray-300-rgb);
@@ -1090,6 +1090,46 @@ select.form-control {
   gap: var(--space-24);
 }
 
+/* Permission Status */
+.permission-status {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-16);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  align-items: center;
+  text-align: center;
+}
+
+.permission-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+}
+
+.permission-status.granted {
+  border-color: var(--color-success);
+  background: rgba(var(--color-success-rgb), 0.1);
+}
+
+.permission-status.denied {
+  border-color: var(--color-error);
+  background: rgba(var(--color-error-rgb), 0.1);
+}
+
+.permission-status.requesting {
+  border-color: var(--color-warning);
+  background: rgba(var(--color-warning-rgb), 0.1);
+}
+
+.btn-grant-permission {
+  margin-top: var(--space-8);
+}
+
 .app-header {
   display: flex;
   align-items: center;
@@ -1128,6 +1168,52 @@ select.form-control {
   border: 1px solid var(--color-card-border);
 }
 
+/* Text Input Section */
+.text-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding: var(--space-24);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+}
+
+.text-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.text-input {
+  min-height: 100px;
+  resize: vertical;
+  font-family: var(--font-family-base);
+}
+
+.text-input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.character-count {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.character-count.warning {
+  color: var(--color-warning);
+}
+
+.character-count.error {
+  color: var(--color-error);
+}
+
+.btn-send-text {
+  min-width: 140px;
+}
+
 .model-selector .form-label {
   margin-bottom: 0;
   white-space: nowrap;
@@ -1137,7 +1223,7 @@ select.form-control {
   min-width: 200px;
 }
 
-/* Recording Interface */
+/* Voice Recording Interface */
 .recording-interface {
   display: flex;
   flex-direction: column;
